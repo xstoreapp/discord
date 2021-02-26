@@ -1,7 +1,10 @@
 dev:
-	python3 main.py
+	docker-compose up
 	inotifywait -q -m -e close_write ./**/* | while read file; do \
-		python3 main.py; \
+		docker-compose up; \
 	done
+fix:
+	docker-compose build --build-arg TOKEN=${TOKEN}
+	docker build -t dragonmenorka/xstore-discord .
 prod:
-	python3 main.py
+	docker run dragonmenorka/xstore-discord
