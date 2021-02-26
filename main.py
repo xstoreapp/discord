@@ -2,7 +2,7 @@ import os
 
 import discord
 
-import commands
+from commands import help
 
 class Client(discord.Client):
   async def on_ready(self):
@@ -12,7 +12,10 @@ class Client(discord.Client):
     if message[0] != "xstore":
       return
     selectedMsg = message[1]
-    commands[selectedMsg](self, msg)
+    cmds = {
+      "help": help.help
+    }
+    await cmds[selectedMsg](self, msg)
 
 client = Client()
 token = os.getenv("TOKEN")
