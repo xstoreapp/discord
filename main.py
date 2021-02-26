@@ -2,7 +2,7 @@ import os
 
 import discord
 
-from commands import help
+from commands import help, github
 
 class Client(discord.Client):
   async def on_ready(self):
@@ -13,7 +13,8 @@ class Client(discord.Client):
       return
     selectedMsg = message[1]
     cmds = {
-      "help": help.help
+      "help": help.help,
+      "github": github.github
     }
     await cmds[selectedMsg](self, msg)
 
